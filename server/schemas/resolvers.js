@@ -14,7 +14,34 @@ const resolvers = {
         }
         throw new AuthenticationError('You need to be logged in!');
     }
-    }
+    },
+    Mutation: {
+      addUser: async (_parent, args) => {
+        const user = await User.create(args);
+        const token = signToken(user);
+  
+        return { token, user };
+  
+    },
+    login: async (_parent, { email, password }) => {
+        const user = await User.findOne({ email });
+  
+        if (!user) {
+            throw new AuthenticationError('User not Found!');
+        }
+  
+        const correctPw = await user.isCorrectPassword(password);
+  
+        if (!correctPw) {
+            throw new AuthenticationError('Incorrect Password!');
+        }
+  
+        const token = signToken(user);
+        return { token, user };
+    },
+    
+    
+  }
   };
     
     module.exports = resolvers;
