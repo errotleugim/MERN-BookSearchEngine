@@ -21,25 +21,24 @@ const httpLink = createHttpLink({
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  uri: '/graphql',
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
-    <ApolloProvider>
+    <ApolloProvider client={client}>
       <Router>
       <>
         <Navbar />
           <Routes>
           <Route exact
             path='/' 
-            component={SearchBooks} 
+            element={<SearchBooks/>} 
           />
           <Route 
             exact path='/saved' 
-            element={SavedBooks} 
+            element={<SavedBooks/>} 
           />
           <Route 
            render={() => <h1 className='display-2'>Wrong page!</h1>}
