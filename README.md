@@ -14,7 +14,7 @@
 
 ## Description
 This is an excercise in refactoring a REST API to graphQL, the whole MERN stack is used. Hence the name. The application renders a search site for books and enables users tolog in and save books to favorites" 
-
+![Screenshot](https://github.com/errotleugim/MERN-BookSearchEngine/blob/master/sshot.png)
 ## Installation
 Download repository, run npm install, then npm run build
 
